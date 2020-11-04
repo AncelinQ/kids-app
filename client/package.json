@@ -7,14 +7,17 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
+    "format": "prettier-eslint --eslint-config-path ./.eslintrc.js --write '**/*.js'",
     "lint": "eslint --ext .js,.vue ."
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.12.2",
     "nuxt": "^2.14.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/vuetify": "^1.11.2",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^6.11.0",

@@ -3,7 +3,7 @@ export default {
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
    */
- mode: 'universal',
+  mode: 'universal',
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -24,17 +24,25 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons',
+      },
+    ],
   },
   /*
    ** Global CSS
    */
   css: [],
+  loading: { color: '#3B8070' },
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: ['~plugins/vuetify.js'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -44,22 +52,40 @@ export default {
    ** Nuxt.js dev-modules
    ** See https://nuxtjs.org/api/configuration-modules/#buildmodules
    */
-  buildModules: [
-    '@nuxtjs/eslint-module',
-  ],
+  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/vuetify'],
   /*
+    '@nuxtjs/vuetify',
    ** Nuxt.js modules
    */
   modules: [
     // Doc: https://nuxtjs.org/api/configuration-modules/
+    '@nuxtjs/axios',
   ],
+  axios: {
+    // proxyHeaders: false
+  },
+  vuetify: {
+    /* module options */
+  },
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
+    vendor: ['axios', 'vuetify'],
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
+    extend(config, ctx) {
+      config.module.rules.push({
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /(node_modules)/,
+        options: {
+          fix: true,
+        },
+      })
+    },
   },
 }
